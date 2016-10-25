@@ -10,22 +10,23 @@ public class Solver {
 		int rows = E.length;
 		int columns = E[0].length;
 		//n = minimum dimension
-		int n = rows < columns ? rows : columns;
+		int n = rows < columns-1 ? rows : columns-1;
 		
 		//gauss elimination method
 		for(int k=0;k<n;k++){
 			
-			for(int i=0;i<rows;i++){
-				if(E[i][k] != 0){
-					R3(k, i);
-					break;
+			if(E[k][k] ==0){
+				for(int i=0;i<rows;i++){
+					if(E[i][k] != 0){
+						R3(k, i);
+						break;
+					}
 				}
 			}
-			
 			float pivot = E[k][k];
 			R1(k, 1/pivot);
 			
-			for(int row=0;row<n;row++){
+			for(int row=0;row<rows;row++){
 				if(row != k){
 					float c =  E[row][k];
 					R2(row, k, -c);
@@ -49,7 +50,7 @@ public class Solver {
 		//check for unique solution case
 		boolean equalToIn = true;
 		outer:for(int row=0;row<n;row++){
-			for(int col=0;col<columns;col++){
+			for(int col=0;col<columns-1;col++){
 				int value = row == col ? 1 : 0;
 				if(E[row][col] != value){
 					equalToIn = false;

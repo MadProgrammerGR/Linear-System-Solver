@@ -21,6 +21,8 @@ public class Main {
 			solver.setMatrix(E);
 			Result result = solver.solve();
 			
+			//System.out.println("final matrix");
+			printArray(solver.getMatrix());
 			switch(result){
 			case IMPOSSIBLE_SOLUTION:
 				System.out.println("Impossible system.");
